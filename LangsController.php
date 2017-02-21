@@ -8,14 +8,15 @@
 	{
 		private $depth = 0;
 		private $string = "";
+		private $default = "ko"; //change this
 
 		public function langs()
 		{
 			$langs = [];
-			foreach(\File::files(\App::langPath()."/ko") as $lang_file)
+			foreach(\File::files(\App::langPath()."/".$this->default) as $lang_file)
 			{
 				$lang = pathinfo($lang_file, PATHINFO_FILENAME);
-				$langs[$lang] = \Lang::get($lang, [], "ko");
+				$langs[$lang] = \Lang::get($lang, [], $this->default);
 			}
 
 			return view("langs", ["langs" => $langs]);
